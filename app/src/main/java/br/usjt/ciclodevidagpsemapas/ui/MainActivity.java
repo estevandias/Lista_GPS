@@ -3,6 +3,7 @@ package br.usjt.ciclodevidagpsemapas.ui;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -19,26 +20,26 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.usjt.ciclodevidagpsemapas.R;
-import br.usjt.ciclodevidagpsemapas.data.DataSource;
-import br.usjt.ciclodevidagpsemapas.data.Localizacao;
+import br.usjt.ciclodevidagpsemapas.data.db.LocalizacaoDAO;
+import br.usjt.ciclodevidagpsemapas.data.models.Localizacao;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION_GPS = 1001;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
-    private List<Localizacao> localizacoes = new ArrayList<>();
 
     private TextView locationText;
+
+    private LocalizacaoDAO localizacaoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        localizacaoDAO = new LocalizacaoDAO(this);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -50,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 double longitudeAtual = location.getLongitude();
 
                 locationText.setText(String.format(getString(R.string.main_label), latitudeAtual, longitudeAtual));
-
-                localizacoes.add(new Localizacao(latitudeAtual, longitudeAtual));
-                if (localizacoes.size() > 50) localizacoes.remove(0);
+                localizacaoDAO.insereLocalizacao(new Localizacao(latitudeAtual, longitudeAtual));
             }
 
             @Override
@@ -83,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void chamaLocalizacoesActivity() {
-        LocalizacoesActivity.chamaActivity(this, new DataSource(localizacoes));
+        Intent intent = new Intent(this, LocalizacoesActivity.class);
+        startActivity(intent);
     }
 
     @Override

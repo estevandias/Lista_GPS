@@ -1,3 +1,3 @@
-# Entregas Android
-Estevan Antonio Dias Ferraz, 817124710
+# USJT-Android-Entregas
 
+Entregas separadas por branches nomeadas de acordo com a aula

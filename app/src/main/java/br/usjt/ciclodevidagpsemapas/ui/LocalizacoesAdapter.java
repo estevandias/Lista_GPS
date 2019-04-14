@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.usjt.ciclodevidagpsemapas.R;
-import br.usjt.ciclodevidagpsemapas.data.Localizacao;
+import br.usjt.ciclodevidagpsemapas.data.models.Localizacao;
 
 public class LocalizacoesAdapter extends RecyclerView.Adapter {
 
