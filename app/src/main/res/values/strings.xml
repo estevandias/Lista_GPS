@@ -4,4 +4,6 @@
     <string name="gps_disabled">Sem o GPS o aplicativo não funciona</string>
 
     <string name="main_label">"Coordenadas atuais:\nLat: %f, Long: %f"</string>
+
+    <string name="service_url">https://api.openweathermap.org/data/2.5/forecast?lat=%f&amp;lon=%f&amp;APPID=efbd1559f8359822ada3afab4527a96b&amp;units=metric</string>
 </resources>

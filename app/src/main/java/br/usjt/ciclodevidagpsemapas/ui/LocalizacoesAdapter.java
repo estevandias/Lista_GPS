@@ -16,7 +16,7 @@ public class LocalizacoesAdapter extends RecyclerView.Adapter {
 
     private List<Localizacao> localizacoes;
 
-    public LocalizacoesAdapter(List<Localizacao> localizacoes) {
+    LocalizacoesAdapter(List<Localizacao> localizacoes) {
         this.localizacoes = localizacoes;
     }
 
@@ -39,20 +39,38 @@ public class LocalizacoesAdapter extends RecyclerView.Adapter {
     private class LocalizacoesViewHolder extends RecyclerView.ViewHolder {
         private TextView latitudeLabel;
         private TextView longitudeLabel;
+        private TextView diaSemanaLabel;
+        private TextView umidadeLabel;
+        private TextView minTempLabel;
+        private TextView maxTempLabel;
+        private TextView descricaoLabel;
 
         LocalizacoesViewHolder(@NonNull View itemView) {
             super(itemView);
 
             latitudeLabel = itemView.findViewById(R.id.latitude_label);
             longitudeLabel = itemView.findViewById(R.id.longitude_label);
+            diaSemanaLabel = itemView.findViewById(R.id.dia_semana_label);
+            umidadeLabel = itemView.findViewById(R.id.umidade_label);
+            minTempLabel = itemView.findViewById(R.id.min_temp_label);
+            maxTempLabel = itemView.findViewById(R.id.max_temp_label);
+            descricaoLabel = itemView.findViewById(R.id.descricao_label);
         }
 
         private void bind(Localizacao localizacao) {
             String latitude = String.valueOf(localizacao.latitude);
             String longitude = String.valueOf(localizacao.longitude);
+            String umidade = String.valueOf(localizacao.clima.umidade);
+            String minTemp = String.valueOf(localizacao.clima.minTemp);
+            String maxTemp = String.valueOf(localizacao.clima.maxTemp);
 
             latitudeLabel.setText(String.format("Lat: %s", latitude.length() > 10 ? latitude.substring(0, 10) : latitude));
             longitudeLabel.setText(String.format("Long: %s", longitude.length() > 10 ? longitude.substring(0, 10) : longitude));
+            diaSemanaLabel.setText(localizacao.clima.diaSemana);
+            umidadeLabel.setText(String.format("Umidade: %s", umidade));
+            minTempLabel.setText(String.format("Min: %sC", minTemp));
+            maxTempLabel.setText(String.format("Max: %sC", maxTemp));
+            descricaoLabel.setText(localizacao.clima.descricao);
         }
     }
 }
