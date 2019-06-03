@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Chat App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-item>
+      <ion-label>Salas</ion-label>
+      <ion-select placeholder="Categoria" [(ngModel)]="session.subject">
+        <ion-select-option
+          *ngFor="let option of options"
+          value="{{ option.label }}"
+          >{{ option.label }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item padding-top>
+      <ion-label position="fixed">Username</ion-label>
+      <ion-input [(ngModel)]="session.user.name"></ion-input>
+    </ion-item>
+    <div padding-top>
+      <ion-button expand="block" (click)="goChat()">Acessar</ion-button>
+    </div>
+  </div>
+</ion-content>

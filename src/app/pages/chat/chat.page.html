@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <div *ngFor="let message of messages">
+      <div *ngIf="!check(message)">
+        <ion-row>
+          <ion-card>
+            <ion-card-content>
+              {{ message.text }}
+            </ion-card-content>
+            <ion-card-header>
+              <ion-card-subtitle>{{ message.user.name }}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-row>
+      </div>
+      <div *ngIf="check(message)">
+        <ion-row justify-content-end text-right>
+          <ion-card>
+            <ion-card-content>
+              {{ message.text }}
+            </ion-card-content>
+            <ion-card-header>
+              <ion-card-subtitle>{{ message.user.name }}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-row>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-input [(ngModel)]="newMessageText" (keyup.enter)="sendMessage()"></ion-input>
+      <button ion-button icon-only (click)="sendMessage()">
+        <ion-icon name="send" size="large"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
